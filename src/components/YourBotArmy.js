@@ -1,20 +1,30 @@
-// src/components/YourBotArmy.js
+import React from "react";
 
-import React from 'react';
+const YourBotArmy = ({ army, removeFromArmy }) => {
+    const handleDischarge = (bot) => {
+        removeFromArmy(bot.id);
+    };
 
-const YourBotArmy = ({ yourBotArmy, releaseFromArmy, dischargeForever }) => {
+    const handleFrontendDischarge = (bot) => {
+        removeFromArmy(bot.id);
+    };
+
     return (
-        <div>
+        <div className="container">
             <h2>Your Bot Army</h2>
-            <ul>
-                {yourBotArmy.map(bot => (
-                    <li key={bot.id}>
-                        <div>{bot.name}</div>
-                        <button onClick={() => releaseFromArmy(bot.id)}>Release</button>
-                        <button onClick={() => dischargeForever(bot.id)}>Discharge</button>
-                    </li>
-                ))}
-            </ul>
+            {army.map((bot) => (
+                <div key={bot.id}>
+                    <img src={bot.avatar_url} alt="bot avatar" />
+                    <h3>Name: {bot.name}</h3>
+                    <button
+                        className="btn btn-danger"
+                        onClick={() => handleDischarge(bot)}
+                    >
+                        Discharge
+                    </button>
+                    <button onClick={() => handleFrontendDischarge(bot)}>X</button>
+                </div>
+            ))}
         </div>
     );
 };
